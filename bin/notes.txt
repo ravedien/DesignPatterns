@@ -1,0 +1,41 @@
+
+JMS - Java Message Service
+JNDI - Java Naming and Directory Interface
+WSDL - Web Service Description Language
+REST - Representational State Transfer
+JAXB - Java Architecture XML Binding
+JMX - Java Management Extension
+DOM - Domain Object Model
+JDBC - Java Database Connectivity
+ODBC - Open Database Connectivity
+JDO - Java Data Objects
+JAXP - Java API for XML Processing
+JNI - Java Native Interface
+AJAX - Asynchronous Javascript and XML
+URL - Uniform Resource Locator
+URI - Uniform Resource Identifier
+SOAP - Simple Object Access Protocol
+LDAP - Lightweight Directory Access Protocol
+EJB - Enterprise Java Bean
+DTD - Document Type Definition
+
+Access Modifier
+              Class    Package    Subclass    World
+public          *         *          *          *
+protected       *         *          *
+no modifier     *         *
+private         *
+
+CREATE OR REPLACE FUNCTION getPokemonByParam(p_name VARCHAR)
+RETURNS TABLE(poke_id int,poke_name VARCHAR) AS $BODY$
+
+DECLARE sqlQuery VARCHAR;
+
+BEGIN
+  sqlQuery :=' SELECT poke_id,poke_name from pokemon where poke_name like ' || quote_literal(p_name);
+  RAISE NOTICE '==== QUERY EXECUTED : %', sqlQuery;
+  return QUERY EXECUTE sqlQuery;
+END; $BODY$
+LANGUAGE 'plpgsql';
+
+select * from getpokemonbyparam('Haunter%')
